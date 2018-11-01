@@ -6,7 +6,6 @@ Hex tile based labyrinth generator.
 
 ![exmaple0](docs/example0.png)
 ![exmaple1](docs/example1.png)
-![exmaple2](docs/example2.png)
 
 The algorithm is as follows:
 
@@ -19,12 +18,10 @@ __World update__:
 
 - For each _cell_:
     - Count the _on_ _neighbours_ of the _cell_
-    - If the _cell_ is _on_:
-        - If _number of neighbours_ is less than 1 or more than 2:
-            - Set the _cell_ to _off_
-    - Else:
-        - If _number of neighbours_ is 2:
-            - Set the _cell_ to _on_
+    - If the _cell_ is _on_ and _number of neighbours_ is less than 1 or more than 2:
+        - Set the _cell_ to _off_
+    - Else if _number of neighbours_ is 2:
+        - Set the _cell_ to _on_
 
 ## Requirements
 

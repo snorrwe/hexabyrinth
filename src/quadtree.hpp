@@ -7,7 +7,8 @@
 #include <tuple>
 
 template <typename T>
-class Quadtree {
+class Quadtree
+{
     using TStored = std::tuple<mino::Point, T>;
 
     // NE, SE, SW, NW
@@ -17,26 +18,29 @@ class Quadtree {
     mino::AABB constraints;
 
 public:
-    explicit Quadtree(mino::AABB&& constraints)
-        : length(0)
-        , constraints(std::move(constraints))
+    explicit Quadtree(mino::AABB&& constraints) : length(0), constraints(std::move(constraints))
     {
     }
 
     auto add(mino::Point const& p, T const& value) -> bool
     {
-        if (!constraints.contains(p)) {
+        if (!constraints.contains(p))
+        {
             return false;
         }
-        if (length + 1 < items.size()) {
-            items[length++] = TStored{ p, value };
+        if (length + 1 < items.size())
+        {
+            items[length++] = TStored{p, value};
             return true;
         }
-        if (children[0] == nullptr) {
+        if (children[0] == nullptr)
+        {
             split();
         }
-        for (auto& child : children) {
-            if (child->add(p, value)) {
+        for (auto& child : children)
+        {
+            if (child->add(p, value))
+            {
                 return true;
             }
         }
@@ -48,21 +52,25 @@ public:
 
     auto get(mino::Point const& p) -> T*
     {
-        if (!constraints.contains(p)) {
+        if (!constraints.contains(p))
+        {
             return nullptr;
         }
-        auto result = std::find_if(items.begin(), items.end(), [&](auto const& i) {
-            return std::get<0>(i) == p;
-        });
-        if (result != items.end()) {
+        auto result = std::find_if(
+            items.begin(), items.end(), [&](auto const& i) { return std::get<0>(i) == p; });
+        if (result != items.end())
+        {
             return &std::get<1>(*result);
         }
-        if (children[0] == nullptr) {
+        if (children[0] == nullptr)
+        {
             return nullptr;
         }
-        for (auto& child : children) {
+        for (auto& child : children)
+        {
             auto result = child->get(p);
-            if (result != nullptr) {
+            if (result != nullptr)
+            {
                 return result;
             }
         }
@@ -83,10 +91,10 @@ private:
         auto const y0 = static_cast<int>(y + h);
         auto const y1 = static_cast<int>(y - h);
 
-        children[0] = std::make_unique<Quadtree<T>>(AABB{ x0, y0, w, h });
-        children[1] = std::make_unique<Quadtree<T>>(AABB{ x0, y1, w, h });
-        children[2] = std::make_unique<Quadtree<T>>(AABB{ x1, y1, w, h });
-        children[3] = std::make_unique<Quadtree<T>>(AABB{ x1, y0, w, h });
+        children[0] = std::make_unique<Quadtree<T>>(AABB{x0, y0, w, h});
+        children[1] = std::make_unique<Quadtree<T>>(AABB{x0, y1, w, h});
+        children[2] = std::make_unique<Quadtree<T>>(AABB{x1, y1, w, h});
+        children[3] = std::make_unique<Quadtree<T>>(AABB{x1, y0, w, h});
     }
 };
 

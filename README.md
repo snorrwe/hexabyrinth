@@ -7,7 +7,7 @@ Hex tile based labyrinth generator.
 ![exmaple0](docs/example0.png)
 ![exmaple1](docs/example1.png)
 
-The algorithm is as follows:
+## The algorithm
 
 __Map generation__:
 

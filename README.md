@@ -4,6 +4,10 @@
 
 Hex tile based labyrinth generator.
 
+![exmaple0](docs/example0.png)
+![exmaple1](docs/example1.png)
+![exmaple2](docs/example2.png)
+
 The algorithm is as follows:
 
 __Map generation__:
@@ -32,7 +36,7 @@ __World update__:
 ```
 git clone https://github.com/snorrwe/hexabyrinth
 cd hexabyrinth
-git submodule init -r
+git submodule init
 git submodule update -r
 cmake -H. -Bbuild
 ```

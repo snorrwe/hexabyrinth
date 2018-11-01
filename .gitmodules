@@ -1,0 +1,3 @@
+[submodule "lib/minomaly"]
+	path = lib/minomaly
+	url = github.com/snorrwe/minomaly

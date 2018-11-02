@@ -48,3 +48,9 @@ cmake --build build
 
 Run the `hexabyrinth` executable in the `build` directory. Press `space` to generate a new labyrinth or `q` to quit.
 
+## TODO
+
+- Parametrize map generation
+- Save/Load map files
+- GUI for parameter changing on the fly
+

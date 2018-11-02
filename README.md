@@ -9,19 +9,19 @@ Hex tile based labyrinth generator.
 
 ## The algorithm
 
-__Map generation__:
+```
+Map generation:
+    Set each cell of the world to on or off
+    Update the world 10 times
 
-- Generate a layout where each _cell_ of the _map_ is randomly set to _on_ or _off_
-- Update the world 10 times
-
-__World update__:
-
-- For each _cell_:
-    - Count the _on_ _neighbours_ of the _cell_
-    - If the _cell_ is _on_ and _number of neighbours_ is less than 1 or more than 2:
-        - Set the _cell_ to _off_
-    - Else if _number of neighbours_ is 2:
-        - Set the _cell_ to _on_
+World update:
+    For each cell:
+        Count the neighbours of the cell that are on
+        If the cell is on and the number of neighbours is less than 1 or more than 2:
+            Set the cell to off
+        Else if number of neighbours is 2:
+            Set the cell to on
+```
 
 ## Requirements
 

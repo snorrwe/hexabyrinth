@@ -1,4 +1,5 @@
 #pragma once
+#include "minomaly/common/point.hpp"
 #include "minomaly/component/position_component.hpp"
 #include <array>
 #include <iostream>
@@ -39,6 +40,16 @@ struct HexComponent
         return *this + ax;
     }
 
+    constexpr auto all_neighbours() const -> std::array<HexComponent, 6>
+    {
+        return std::array{neighbour(Direction::NE),
+                          neighbour(Direction::E),
+                          neighbour(Direction::SE),
+                          neighbour(Direction::SW),
+                          neighbour(Direction::W),
+                          neighbour(Direction::NW)};
+    }
+
     constexpr auto operator+(HexComponent const& other) const -> HexComponent
     {
         return HexComponent{q + other.q, r + other.r};
@@ -55,6 +66,11 @@ struct HexComponent
         auto x = HEX_SIZE * (sqrt_3 * q + sqrt_3 / 2 * r);
         auto y = HEX_SIZE * (3.0 / 2 * r);
         return mino::PositionComponent{int(x), int(y)};
+    }
+
+    operator mino::Point() const
+    {
+        return mino::Point{{q, r}};
     }
 };
 

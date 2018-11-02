@@ -55,7 +55,7 @@ public:
                 auto& hex_component = hex_component_manager->add_component(entity.id);
                 hex_component.q = offset + x;
                 hex_component.r = y;
-                cells.add(Point{{hex_component.q, hex_component.r}}, false);
+                cells.add(hex_component, false);
 
                 auto components = render_system->create_renderable_entity(entity);
                 components.position = hex_component.as_position() + map_offset;
@@ -97,26 +97,17 @@ private:
     void update_cells()
     {
         hex_component_manager->iter([&](auto const& entity, auto const& component) {
-            const auto neighbours = std::array{
-                component.neighbour(Direction::NE),
-                component.neighbour(Direction::E),
-                component.neighbour(Direction::SE),
-                component.neighbour(Direction::SW),
-                component.neighbour(Direction::W),
-                component.neighbour(Direction::NW),
-            };
             auto n_neighbours = 0;
-            for (auto& neighbour : neighbours)
+            for (auto& neighbour : component.all_neighbours())
             {
-                auto const p = Point{{neighbour.q, neighbour.r}};
-                auto r = cells.get(p);
+                // auto const p = Point{{neighbour.q, neighbour.r}};
+                auto r = cells.get(neighbour);
                 if (r != nullptr && *r)
                 {
                     ++n_neighbours;
                 }
             }
-            auto const p = Point{{component.q, component.r}};
-            auto r = cells.get(p);
+            auto r = cells.get(component);
             if (r == nullptr)
             {
                 return;
@@ -148,8 +139,7 @@ private:
         rng.seed(std::random_device()());
         std::uniform_int_distribution<std::mt19937::result_type> dist(1, 255);
         hex_component_manager->iter([&](auto const& entity, auto const& component) {
-            auto const point = Point{{component.q, component.r}};
-            auto r = cells.get(point);
+            auto r = cells.get(component);
             if (r == nullptr)
             {
                 return;

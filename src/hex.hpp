@@ -11,7 +11,7 @@ constexpr auto MAP_SIZE_X = SCREEN_SIZE_X / HEX_SIZE;
 constexpr auto MAP_SIZE_Y = SCREEN_SIZE_Y / HEX_SIZE;
 constexpr int HEX_TEXTURE_SIZE = HEX_SIZE * 2;
 
-enum class Direction : size_t
+enum class Direction : uint8_t
 {
     NE = 0,
     E = 1,

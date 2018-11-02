@@ -115,7 +115,7 @@ private:
             assert(render_component);
             if (is_alive)
             {
-                if (1 > n_neighbours || n_neighbours > 2)
+                if (n_neighbours < 1 || 2 < n_neighbours)
                 {
                     *r = false;
                     render_component->texture = nullptr;

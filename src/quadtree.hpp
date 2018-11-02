@@ -91,10 +91,10 @@ private:
         auto const y0 = static_cast<int>(y + h);
         auto const y1 = static_cast<int>(y - h);
 
-        children[0] = std::make_unique<Quadtree<T>>(AABB{x0, y0, w, h});
-        children[1] = std::make_unique<Quadtree<T>>(AABB{x0, y1, w, h});
-        children[2] = std::make_unique<Quadtree<T>>(AABB{x1, y1, w, h});
-        children[3] = std::make_unique<Quadtree<T>>(AABB{x1, y0, w, h});
+        children[0] = std::make_unique<Quadtree<T>>(mino::AABB{x0, y0, w, h});
+        children[1] = std::make_unique<Quadtree<T>>(mino::AABB{x0, y1, w, h});
+        children[2] = std::make_unique<Quadtree<T>>(mino::AABB{x1, y1, w, h});
+        children[3] = std::make_unique<Quadtree<T>>(mino::AABB{x1, y0, w, h});
     }
 };
 

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 set(PROJECT_NAME hexabyringth)
 project(${PROJECT_NAME} LANGUAGES CXX)
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/map_system.cpp)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 target_compile_options(${PROJECT_NAME} PRIVATE -Wno-pragmas)

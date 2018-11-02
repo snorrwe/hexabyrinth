@@ -28,7 +28,6 @@ public:
         , hex_component_manager(engine.create_component_manager<HexComponent>())
         , logger(engine.get_log_manager()->get_logger("map_system"))
     {
-        assert(hex_component_manager);
     }
     ~MapSystem() = default;
 
@@ -48,6 +47,7 @@ public:
         PositionComponent map_offset{75, 50};
         for (auto y = 0; y < MAP_SIZE_Y; ++y)
         {
+            // Each row should start at `q == -y / 2` so the map renders as a rectangle
             auto offset = -y / 2;
             for (auto x = 0; x < MAP_SIZE_X; ++x)
             {
@@ -70,8 +70,7 @@ public:
 
     void update() override
     {
-        auto const& events = input_system->get_events();
-        for (auto& event : events)
+        for (auto& event : input_system->get_events())
         {
             if (event.type == SDL_KEYDOWN)
             {
@@ -100,7 +99,6 @@ private:
             auto n_neighbours = 0;
             for (auto& neighbour : component.all_neighbours())
             {
-                // auto const p = Point{{neighbour.q, neighbour.r}};
                 auto r = cells.get(neighbour);
                 if (r != nullptr && *r)
                 {

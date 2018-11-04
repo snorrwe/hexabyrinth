@@ -27,6 +27,7 @@ World update:
 
 - C++17 compatible compiler
 - CMake
+- Windows (`Minomaly` which I used for rendering only supports the Windows platform at the moment (sorry))
 
 ## Setting up
 
